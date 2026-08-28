@@ -16,7 +16,10 @@ def processar(conteudo):
 
     if caminho_arquivo:
         try:
-            sql_template = gerar_sql_script(conteudo)
+            linhas = conteudo.split('\n')
+            ids = [lin.strip().strip("'\",") for lin in linhas if lin.strip()]
+                        
+            sql_template = gerar_sql_script(ids)
             
             with open(caminho_arquivo, "w", encoding="utf-8") as f:
                 f.write(sql_template)

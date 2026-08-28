@@ -1,11 +1,8 @@
-def gerar_sql_script(texto_ids):
-    linhas = texto_ids.split('\n')
-    ids_limpos = [lin.strip().strip("'\",") for lin in linhas if lin.strip()]
-    
-    if not ids_limpos:
+def gerar_sql_script(ids):
+    if not ids:
         raise ValueError("Nenhum ID válido foi encontrado no campo de texto.")
 
-    valores_insert = ",\n".join([f"\t('{id_str}')" for id_str in ids_limpos])
+    valores_insert = ",\n".join([f"\t('{id_str}')" for id_str in ids])
 
     sql_template = f"""DECLARE @IdsParaProcessar TABLE (
     ID_ESOCIAL Varchar(36),
